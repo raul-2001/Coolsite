@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="'stylesheet" type="text/css" href="static/players/css/style.css">
+    <link rel="'stylesheet" type="text/css" href="static/players/css/fontawesome.min.css">
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+</head>
+<body>
+
+{% block mainmenu %}
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'about' %}">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'add_post' %}">Add post</a>
+  </li>
+</ul>
+<!--{% for m in menu %}-->
+<!--<ul class="nav ">-->
+<!--    <li class="nav-item"><a class="nav-link" href="{% url m.url_name %}">{{m.title}}</a></li>-->
+<!--</ul>-->
+<!--{% endfor %}-->
+
+<div class="container">
+{% if request.user.is_authenticated %}
+<p class="nav justify-content-end left"><a >{{user.username}}</a> | <a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+<p class="nav justify-content-end left"><a href="{% url 'register' %}">Register</a> | <a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+</div>
+
+<br>
+<div id="list-example" class="list-group container">
+{% if cat_selected == 0 %}
+    <a class="list-group-item list-group-item-action active" >All categories</a>
+{% else %}
+
+    <a class="list-group-item list-group-item-action" href="{% url 'home' %}">All categories</a>
+{% endif %}
+
+    {% for c in cats %}
+     {% if c.pk == cat_selected %}
+     <a class="list-group-item list-group-item-action active" href="#">{{ c.name }}</a>
+       {% else %}
+  <a class="list-group-item list-group-item-action" href="{{c.get_absolute_url}}">{{ c.name }}</a>
+    {% endif %}
+{% endfor %}
+</div>
+
+
+
+
+
+<!--<br><p>Categories</p>-->
+<!--{% if cat_selected == 0 %}-->
+<!--    <li><p>All categories</p></li>-->
+<!--{% else %}-->
+<!--    <li><a href="{% url 'home' %}">All categories</a></li>-->
+<!--{% endif %}-->
+
+<!--{% for c in cats %}-->
+<!--    {% if c.pk == cat_selected %}-->
+<!--        <li>{{c.name}}</li>-->
+<!--    {% else %}-->
+<!--        <li><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>-->
+<!--    {% endif %}-->
+<!--{% endfor %}-->
+
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>

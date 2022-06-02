@@ -1,0 +1,21 @@
+{% extends 'players/base.html' %}
+    <h1>{{title}}</h1>
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+    {% for p in posts %}
+    <div class="col-md-8">
+        <h1>{{p.title}}</h1>
+        <p>{{p.content}}</p>
+    </div>
+    <div class="col-md-4">
+        <a href="{{p.get_absolute_url}}"><p><img src="{{p.photo.url}}" style="width: 250px; height: 200px"></p></a>
+    </div>
+        <button type="button" class="btn btn-primary"><a class="text-light" href="{{p.get_absolute_url}}">Read post</a></button>
+        <hr>
+
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

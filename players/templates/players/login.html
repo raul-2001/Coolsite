@@ -1,0 +1,23 @@
+{% extends 'players/base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+  <form class="form-control" method="post">
+
+    {% csrf_token %}
+    <div >{{f.non_field_errors}}</div>
+
+{% for f in form %}
+    <div class="mb-3">
+      <label for="{{f.id_for_label}}" class="form-label" style="padding: 10px">{{f.label}}: </label>
+      <p class="form-control form-control-sm">{{ f }}</p>
+    <div >{{f.errors}}</div>
+    </div>
+{% endfor %}
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+  </form>
+</div>
+{% endblock %}

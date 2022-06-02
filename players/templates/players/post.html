@@ -1,0 +1,18 @@
+{% extends 'players/base.html' %}
+    <h1>{{title}}</h1>
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{posts.title}}</h1>
+            <p>{{posts.content}}</p>
+        </div>
+        <div class="col-md-4">
+            <p><img src="{{posts.photo.url}}" style="width: 400px"></p>
+             <a href="/"><i class="fas fa-arrow-left">Back</i></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
